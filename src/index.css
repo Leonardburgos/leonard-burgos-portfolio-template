@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://path/to/your/font/source'); /* Add the correct font URL here */
+
+/* Global background transition for smooth effect */
+body {
+  @apply text-textcolor;
+  transition: background-color 1s ease-in-out, color 1s ease-in-out; /* Add smooth transition for background */
+}
+
+/* Smooth transition for h1, h2, h3... */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "__Mulish_0365e9", "__Mulish_Fallback_0365e9", sans-serif;
+}
+
+p {
+  font-family: "__Space_Mono_7dd02c", "__Space_Mono_Fallback_7dd02c", monospace;
+}
+
+/* Light Mode background */
+body {
+  background: linear-gradient(to bottom, #eeeeee, #ffffff); /* Light background */
+  background-size: 100% 800%;
+  background-repeat: no-repeat;
+}
+
+/* Dark Mode background */
+body.dark {
+  background: linear-gradient(to bottom, #212121, #ffffff); /* Dark background */
+}
+
+/* Dark Mode: Apply smooth transition for background color and text color */
+body.dark {
+  transition: background-color 1s ease-in-out, color 1s ease-in-out; /* Smooth background color transition */
+  background: linear-gradient(to bottom, #212121, #ffffff);
+}
