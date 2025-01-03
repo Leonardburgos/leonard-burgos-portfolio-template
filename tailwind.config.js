@@ -15,6 +15,12 @@ module.exports = {
       backgroundImage: {
         'silver-gradient': 'linear-gradient(135deg, #e0e0e0, #c0c0c0, #f5f5f5)',
       },
+      screens: {
+        sm: '640px', // Small devices (portrait tablets)
+        md: '768px', // Medium devices (landscape tablets)
+        lg: '1024px', // Large devices (laptops/desktops)
+        xl: '1280px', // Extra large devices (larger desktops)
+      },
     },
   },
   plugins: [],
