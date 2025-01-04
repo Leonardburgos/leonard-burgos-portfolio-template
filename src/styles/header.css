@@ -13,6 +13,11 @@
     --transition: all 0.5s ease;
 }
 
+header {
+    transition: opacity 0.5s ease, visibility 0.5s ease, display 0s ease 0.5s;
+  }
+  
+
 /* Fade-in animation */
 .fade-in {
     opacity: 1;
