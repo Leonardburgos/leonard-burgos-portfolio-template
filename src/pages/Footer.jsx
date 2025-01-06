@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../assets/LOGO.png";
+import Logo2 from "../assets/LOGO2.png";
 import {
   FaFacebookF,
   FaLinkedinIn,
@@ -8,7 +9,7 @@ import {
   FaGitlab,
   FaEnvelope,
 } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const socialMedia = [
   {
@@ -32,19 +33,27 @@ const socialMedia = [
     link: "https://linkedin.com",
   },
   {
-    id: "social-media-4",
+    id: "social-media-5", // Fix duplicate ID
     icon: <FaEnvelope />,
     link: "https://gmail.com",
   },
   {
-    id: "social-media-4",
+    id: "social-media-6", // Fix duplicate ID
     icon: <FaGitlab />,
     link: "https://gitlab.com",
   },
 ];
 
 const Footer = () => {
+  const [darkMode, setDarkMode] = useState(false); // State to handle dark mode
   const navigate = useNavigate();
+  const location = useLocation(); // Hook to get current location
+
+  // Toggle dark mode on button click
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    document.documentElement.classList.toggle("dark", !darkMode);
+  };
 
   const scrollToSection = (hash) => {
     // First, navigate to /home
@@ -65,13 +74,20 @@ const Footer = () => {
     }, 200); // 200ms delay
   };
 
+  // Effect to scroll to top except for About and Skills
+  useEffect(() => {
+    if (location.pathname !== "/home") {
+      window.scrollTo(0, 0); // Scroll to the top
+    }
+  }, [location]);
+
   return (
     <footer className="bg-[#eeeeee] dark:bg-[#212121] text-black dark:text-white py-6">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
         {/* Logo and Copy Info */}
-        <div className="flex flex-col items-center justify-center  mb-4 mb-0">
+        <div className="flex flex-col items-center justify-center mb-4 mb-0">
           <img
-            src={Logo}
+            src={darkMode ? Logo2 : Logo}
             alt="Logo"
             className="h-[200px] w-[200px] ml-12 mr-12"
           />
@@ -82,25 +98,21 @@ const Footer = () => {
         </div>
 
         {/* Navigation Links */}
-        <div className="flex-[1.5] w-full flex flex-row justify-between flex-wrap md:mt-0 mt-10">
-          <div className="flex flex-col ss:my-0 my-4 min-w-[150px]">
-            <h4 className="font-poppins font-medium text-[18px] leading-[27px] text-white">
-              Navigation
-            </h4>
+        <div className="flex-[1.5] w-full flex flex-col md:flex-row justify-between flex-wrap mt-10 ml-12 mr-12 ">
+          {/* Row 1: Home, About Me, Skills */}
+          <div className="flex flex-col min-w-[150px]">
+            <a
+              href="#home"
+              className="font-poppins font-normal text-[24px] leading-[24px] text-dimWhite hover:text-secondary"
+            >
+              Home
+            </a>
             <ul className="list-none mt-4">
-              <li className="font-poppins font-normal text-[16px] leading-[24px] text-dimWhite hover:text-secondary cursor-pointer mb-4">
-                <a
-                  href="#home"
-                  className="hover:underline transition-opacity duration-300"
-                >
-                  Home
-                </a>
-              </li>
               <li
                 onClick={() => scrollToSection("#about")}
                 className="font-poppins font-normal text-[16px] leading-[24px] text-dimWhite hover:text-secondary cursor-pointer mb-4"
               >
-                About
+                About Me
               </li>
               <li
                 onClick={() => scrollToSection("#skills")}
@@ -108,29 +120,47 @@ const Footer = () => {
               >
                 Skills
               </li>
+            </ul>
+          </div>
+
+          {/* Row 2: Projects */}
+          <div className="flex flex-col min-w-[150px] sm:pl-8 mb-6">
+          <a
+              href="#projects"
+              className="font-poppins font-normal text-[24px] leading-[24px] text-dimWhite hover:text-secondary"
+            >
+              Personal Projects
+            </a>
+            <ul className="list-none mt-4">
               <li className="font-poppins font-normal text-[16px] leading-[24px] text-dimWhite hover:text-secondary cursor-pointer mb-4">
-                <a
-                  href="#projects"
-                  className="hover:underline transition-opacity duration-300"
-                >
-                  Projects
-                </a>
+                Project 1
               </li>
               <li className="font-poppins font-normal text-[16px] leading-[24px] text-dimWhite hover:text-secondary cursor-pointer mb-4">
-                <a
-                  href="#knowledgebase"
-                  className="hover:underline transition-opacity duration-300"
-                >
-                  Blogs
-                </a>
+                Project 2
               </li>
-              <li className="font-poppins font-normal text-[16px] leading-[24px] text-dimWhite hover:text-secondary cursor-pointer mb-0">
-                <a
-                  href="#contact"
-                  className="hover:underline transition-opacity duration-300"
-                >
-                  Contact
-                </a>
+              <li className="font-poppins font-normal text-[16px] leading-[24px] text-dimWhite hover:text-secondary cursor-pointer mb-4">
+                Project 3
+              </li>
+            </ul>
+          </div>
+
+          {/* Row 3: Blogs */}
+          <div className="flex flex-col min-w-[150px] sm:pl-8">
+          <a
+              href="#knowledgebase"
+              className="font-poppins font-normal text-[24px] leading-[24px] text-dimWhite hover:text-secondary"
+            >
+              Knowledge Bases
+            </a>
+            <ul className="list-none mt-4">
+              <li className="font-poppins font-normal text-[16px] leading-[24px] text-dimWhite hover:text-secondary cursor-pointer mb-4">
+                How to create a Flask API?
+              </li>
+              <li className="font-poppins font-normal text-[16px] leading-[24px] text-dimWhite hover:text-secondary cursor-pointer mb-4">
+                Setting up MySQL and Redis on Docker
+              </li>
+              <li className="font-poppins font-normal text-[16px] leading-[24px] text-dimWhite hover:text-secondary cursor-pointer mb-4">
+                Deploying Docker Container on Google Cloud Platform
               </li>
             </ul>
           </div>
