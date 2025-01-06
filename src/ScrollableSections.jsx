@@ -3,8 +3,9 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 const sections = [
   { id: "", label: "Home" },
-  { id: "/about", label: "About" },
-  { id: "/skills", label: "Skills" },
+  { id: "about", label: "About" },
+  { id: "skills", label: "Skills" },
+
 ];
 
 const ScrollableSections = () => {
@@ -12,15 +13,9 @@ const ScrollableSections = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // Scroll to the specific section when the hash in the URL changes
-    if (location.hash) {
-      const sectionId = location.hash.replace("#", "");
-      const sectionElement = document.getElementById(sectionId);
-      if (sectionElement) {
-        sectionElement.scrollIntoView({ behavior: "smooth" });
-      }
-    } else {
-      window.scrollTo(0, 0); // Scroll to the top of the page for no hash
+    // Avoid auto-centering Home, scroll to the top of the page
+    if (!location.hash) {
+      window.scrollTo(0, 0); // Scroll to the top of the page
     }
   }, [location]);
 
@@ -34,7 +29,7 @@ const ScrollableSections = () => {
     const observerCallback = (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          const newHash = `#${entry.target.id}`;
+          const newHash = `#${entry.target.id}`; 
           if (location.hash !== newHash) {
             navigate(newHash, { replace: true });
           }
@@ -57,12 +52,12 @@ const ScrollableSections = () => {
   }, [navigate, location]);
 
   return (
-    <main className="scroll-smooth bg-gradient-to-b from-[#eeeeee] to-[#ffffff] dark:from-[#212121] dark:to-[#ffffff] bg-[length:100%_7000%] bg-no-repeat">
+    <main className="scroll-smooth bg-gradient-to-b from-[#eeeeee] to-[#ffffff] dark:from-[#212121] dark:to-[#ffffff] bg-[length:100%_7000%] bg-no-repeat ">
       {sections.map(({ id, label }) => (
         <section
           key={id}
           id={id}
-          className="min-h-screen"
+          className="min-h-screen "
           style={{ padding: "4rem 2rem" }}
         >
           <h1 className="text-4xl text-black dark:text-white">{label}</h1>
