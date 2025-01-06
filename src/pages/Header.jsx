@@ -8,10 +8,11 @@ import Cloud4 from "../assets/cloud_4.svg";
 import Stars from "../assets/stars.svg";
 import { FaBars, FaTimes } from "react-icons/fa";
 import "../styles/header.css";
-import { useNavigate,} from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Header = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [darkMode, setDarkMode] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [headerVisible, setHeaderVisible] = useState(true);
@@ -65,7 +66,7 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const aboutSection = document.querySelector("#about"); // Match `#about` directlySS
+      const aboutSection = document.querySelector("#about"); // Match `#about` directly
       if (aboutSection) {
         const aboutTop = aboutSection.offsetTop;
         const windowScrollTop = window.scrollY;
@@ -78,6 +79,13 @@ const Header = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Update header visibility based on route
+  useEffect(() => {
+    if (location.pathname !== "/home") {
+      setHeaderVisible(true); // Make header visible when not on /home
+    }
+  }, [location]);
 
   return (
     <header

@@ -3,6 +3,7 @@ import { HashRouter as Router } from "react-router-dom"; // Using HashRouter
 import { ToastContainer } from "react-toastify"; // For toasts
 import Header from './pages/Header'; 
 import RouterComponent from "./Router"; // Import your router component
+import Footer from "./pages/Footer";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <ToastContainer />
         <Header />
         <RouterComponent /> {/* Use the Router component here */}
+        <Footer />
       </div>
     </Router>
   );
