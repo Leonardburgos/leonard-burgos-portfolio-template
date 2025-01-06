@@ -7,12 +7,12 @@ import Cloud3 from "../assets/cloud_3.svg";
 import Cloud4 from "../assets/cloud_4.svg";
 import Stars from "../assets/stars.svg";
 import { FaBars, FaTimes } from "react-icons/fa";
-import "../styles/header.css"; // Ensure the CSS for animations is imported
+import "../styles/header.css";
 
 const Header = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [headerOpacity, setHeaderOpacity] = useState(1); // Initial opacity of the header
+  const [headerVisible, setHeaderVisible] = useState(true); // Tracks header visibility
 
   const toggleDarkMode = () => {
     const isDarkMode = !darkMode;
@@ -24,6 +24,14 @@ const Header = () => {
     } else {
       document.documentElement.classList.add("light");
       document.documentElement.classList.remove("dark");
+    }
+  };
+
+  const scrollToSection = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+      setMenuOpen(false);
     }
   };
 
@@ -41,7 +49,6 @@ const Header = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // Fade out the header after scrolling past the "About" section
   useEffect(() => {
     const handleScroll = () => {
       const aboutSection = document.querySelector("#about");
@@ -49,49 +56,55 @@ const Header = () => {
         const aboutTop = aboutSection.offsetTop;
         const windowScrollTop = window.scrollY;
 
-        // Fade out the header when the About section starts appearing
-        if (windowScrollTop >= aboutTop - 100) {
-          setHeaderOpacity(0); // Start fading out
-        } else {
-          setHeaderOpacity(1); // Keep the header visible
-        }
+        // Hide the header when the About section starts appearing
+        setHeaderVisible(windowScrollTop < aboutTop - 100);
       }
     };
 
     window.addEventListener("scroll", handleScroll);
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <header
-      className="sticky top-0 z-50 flex items-center justify-between bg-[#eeeeee] dark:bg-[#212121] h-[90px] px-4 pt-6 pb-5 transition-opacity duration-1000"
-      style={{ opacity: headerOpacity }}
+      className={`sticky top-0 z-50 flex items-center justify-between bg-[#eeeeee] dark:bg-[#212121] h-[90px] px-4 pt-6 pb-5 transition-transform duration-500 ${
+        headerVisible ? "translate-y-0" : "-translate-y-full"
+      }`}
     >
       <div className="flex items-center">
         <img
           src={darkMode ? Logo2 : Logo}
           alt="Logo"
-          className={`h-[70px] w-[70px] ml-12 transition-opacity duration-300 ${
-            darkMode ? "fade-in" : "fade-out"
-          }`}
+          className="h-[70px] w-[70px] ml-12 transition-opacity duration-300"
         />
       </div>
 
       <nav className="hidden md:flex grow justify-center space-x-4 text-[18px] text-black dark:text-white transition-all duration-300">
-        <a href="/" className="hover:underline transition-opacity duration-300">
+        <a href="#home" className="hover:underline transition-opacity duration-300">
           Home
         </a>
-        <a href="#about" className="hover:underline transition-opacity duration-300">
-          About
-        </a>
-        <a href="#skills" className="hover:underline transition-opacity duration-300">
+        <span
+          onClick={() => scrollToSection("/about")}
+          className="hover:underline cursor-pointer transition-opacity duration-300"
+        >
+          About Me
+        </span>s
+        <span
+          onClick={() => scrollToSection("/skills")}
+          className="hover:underline cursor-pointer transition-opacity duration-300"
+        >
           Skills
-        </a>
-        <a href="#projects" className="hover:underline transition-opacity duration-300">
+        </span>
+        <a
+          href="#projects"
+          className="hover:underline transition-opacity duration-300"
+        >
           Projects
         </a>
-        <a href="#contact" className="hover:underline transition-opacity duration-300">
+        <a
+          href="#contact"
+          className="hover:underline transition-opacity duration-300"
+        >
           Contact
         </a>
       </nav>
@@ -128,22 +141,35 @@ const Header = () => {
           </div>
         </label>
       </div>
+
       {menuOpen && (
         <div className="md:hidden absolute top-[90px] right-0 w-[150px] bg-[#eeeeee] dark:bg-[#212121] z-50 py-4">
           <nav className="flex flex-col items-center space-y-4 text-black dark:text-white">
-            <a href="/" className="hover:underline">
+            <a href="/" className="hover:underline transition-opacity duration-300">
               Home
             </a>
-            <a href="#about" className="hover:underline">
-              About
-            </a>
-            <a href="#skills" className="hover:underline">
+            <span
+              onClick={() => scrollToSection("about")}
+              className="hover:underline cursor-pointer transition-opacity duration-300"
+            >
+              About Me
+            </span>
+            <span
+              onClick={() => scrollToSection("skills")}
+              className="hover:underline cursor-pointer transition-opacity duration-300"
+            >
               Skills
-            </a>
-            <a href="#projects" className="hover:underline">
+            </span>
+            <a
+              href="#projects"
+              className="hover:underline transition-opacity duration-300"
+            >
               Projects
             </a>
-            <a href="#contact" className="hover:underline">
+            <a
+              href="#contact"
+              className="hover:underline transition-opacity duration-300"
+            >
               Contact
             </a>
 
