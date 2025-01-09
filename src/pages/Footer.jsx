@@ -125,7 +125,7 @@ const Footer = () => {
 
           {/* Row 2: Projects */}
           <div className="flex flex-col min-w-[150px] sm:pl-8 mb-6">
-          <a
+            <a
               href="#projects"
               className="font-poppins font-normal text-[24px] leading-[24px] text-dimWhite hover:text-secondary"
             >
@@ -146,7 +146,7 @@ const Footer = () => {
 
           {/* Row 3: Blogs */}
           <div className="flex flex-col min-w-[150px] sm:pl-8">
-          <a
+            <a
               href="#knowledgebase"
               className="font-poppins font-normal text-[24px] leading-[24px] text-dimWhite hover:text-secondary"
             >
@@ -168,8 +168,8 @@ const Footer = () => {
       </div>
 
       {/* Social Icons */}
-      <div className="w-full flex justify-between items-center flex-row flex-col pt-6 border-t-[1px] border-t-[#3F3E45]">
-        <p className="font-poppins font-normal text-center text-[12px] leading-[27px] text-white mb-2">
+      <div className="w-full flex justify-between items-center flex-col md:flex-row pt-6 border-t-[1px] border-t-[#3F3E45] pl-6 pr-6">
+        <p className="font-poppins font-normal text-center text-[12px] leading-[27px] text-black dark:text-white mb-2">
           Copyright Ⓒ 2025 John Leonard Burgos. All Rights Reserved.
         </p>
 
@@ -177,7 +177,7 @@ const Footer = () => {
           {socialMedia.map((social, index) => (
             <div
               key={index}
-              className={`w-[21px] h-[21px] text-white text-2xl cursor-pointer ${
+              className={`w-[24px] h-[24px] text-black dark:text-white text-2xl cursor-pointer ${
                 index !== socialMedia.length - 1 ? "mr-6" : "mr-0"
               }`}
               onClick={() => window.open(social.link)}
