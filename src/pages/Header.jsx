@@ -30,6 +30,13 @@ const Header = () => {
     }
   };
 
+
+  useEffect(() => {
+    // Navigate to /home on first load if not already there
+    if (location.pathname !== "/home") {
+      navigate("/home");
+    }
+  }, []);
   const scrollToSection = (hash) => {
     // First, navigate to /home
     navigate("/home");
