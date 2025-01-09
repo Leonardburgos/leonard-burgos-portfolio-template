@@ -33,12 +33,12 @@ const socialMedia = [
     link: "https://linkedin.com",
   },
   {
-    id: "social-media-5", // Fix duplicate ID
+    id: "social-media-5",
     icon: <FaEnvelope />,
     link: "https://gmail.com",
   },
   {
-    id: "social-media-6", // Fix duplicate ID
+    id: "social-media-6",
     icon: <FaGitlab />,
     link: "https://gitlab.com",
   },
@@ -46,38 +46,30 @@ const socialMedia = [
 
 const Footer = () => {
   const [darkMode, setDarkMode] = useState(false); // State to handle dark mode
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear()); // State for current year
   const navigate = useNavigate();
-  const location = useLocation(); // Hook to get current location
+  const location = useLocation();
 
-  // Toggle dark mode on button click
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
     document.documentElement.classList.toggle("dark", !darkMode);
   };
 
   const scrollToSection = (hash) => {
-    // First, navigate to /home
     navigate("/home");
-
-    // Set a small delay before adding the hash to the URL and scrolling
     setTimeout(() => {
       const sectionId = hash.replace("#", "");
       const section = document.getElementById(sectionId);
-
-      // Navigate to /home with the section hash
       navigate(`/home#${sectionId}`);
-
-      // Scroll to the section
       if (section) {
         section.scrollIntoView({ behavior: "smooth" });
       }
-    }, 200); // 200ms delay
+    }, 200);
   };
 
-  // Effect to scroll to top except for About and Skills
   useEffect(() => {
     if (location.pathname !== "/home") {
-      window.scrollTo(0, 0); // Scroll to the top
+      window.scrollTo(0, 0);
     }
   }, [location]);
 
@@ -98,7 +90,7 @@ const Footer = () => {
         </div>
 
         {/* Navigation Links */}
-        <div className="flex-[1.5] w-full flex flex-col md:flex-row justify-between flex-wrap mt-10 ml-12 mr-12 ">
+        <div className="flex-[1.5] w-full flex flex-col md:flex-row justify-between flex-wrap mt-10 ml-12 mr-12">
           {/* Row 1: Home, About Me, Skills */}
           <div className="flex flex-col min-w-[150px]">
             <a
@@ -170,7 +162,7 @@ const Footer = () => {
       {/* Social Icons */}
       <div className="w-full flex justify-between items-center flex-col md:flex-row pt-6 border-t-[1px] border-t-[#3F3E45] pl-6 pr-6">
         <p className="font-poppins font-normal text-center text-[12px] leading-[27px] text-black dark:text-white mb-2">
-          Copyright Ⓒ 2025 John Leonard Burgos. All Rights Reserved.
+          Copyright Ⓒ {currentYear} John Leonard Burgos. All Rights Reserved.
         </p>
 
         <div className="flex flex-row md:mt-0 mt-6">
