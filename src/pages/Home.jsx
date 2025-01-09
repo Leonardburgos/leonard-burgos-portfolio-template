@@ -1,17 +1,17 @@
 import React from "react";
 
-const About = () => {
+const Home = () => {
   return (
     <section
-      id="about"
+      id=""
       className="min-h-screen flex flex-col justify-center items-center"
     >
-      <h1 className="text-4xl text-black dark:text-white">About</h1>
+      <h1 className="text-4xl text-black dark:text-white">Home</h1>
       <p className="text-lg text-gray-700 dark:text-gray-300 mt-4">
-        This is the About section. Here you can describe yourself.
+        Welcome to the Home section!
       </p>
     </section>
   );
 };
 
-export default About;
+export default Home;

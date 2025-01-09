@@ -1,10 +1,13 @@
 import React, { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Skills from "./pages/Skills";
 
 const sections = [
-  { id: "", label: "Home" },
-  { id: "about", label: "About" },
-  { id: "skills", label: "Skills" },
+  { id: "", label: "Home", component: <Home /> },
+  { id: "about", label: "About", component: <About /> },
+  { id: "skills", label: "Skills", component: <Skills /> },
 ];
 
 const ScrollableSections = () => {
@@ -12,7 +15,6 @@ const ScrollableSections = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // Avoid auto-centering Home, scroll to the top of the page
     if (!location.hash) {
       window.scrollTo(0, 0); // Scroll to the top of the page
     }
@@ -22,7 +24,7 @@ const ScrollableSections = () => {
     const observerOptions = {
       root: null,
       rootMargin: "0px",
-      threshold: 0.6, // Trigger when 60% of the section is visible
+      threshold: 0.6,
     };
 
     let currentVisibleSection = null;
@@ -30,7 +32,6 @@ const ScrollableSections = () => {
     const observerCallback = (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          // Update the hash only if it's a new section
           if (currentVisibleSection !== entry.target.id) {
             currentVisibleSection = entry.target.id;
             const newHash = `#${currentVisibleSection}`;
@@ -59,17 +60,10 @@ const ScrollableSections = () => {
 
   return (
     <main className="scroll-smooth bg-gradient-to-b from-[#eeeeee] to-[#ffffff] dark:from-[#212121] dark:to-[#ffffff] bg-[length:100%_7000%] bg-no-repeat">
-      {sections.map(({ id, label }) => (
-        <section
-          key={id}
-          id={id}
-          className="min-h-screen"
-          style={{ padding: "4rem 2rem" }}
-        >
-          <h1 className="text-4xl text-black dark:text-white">{label}</h1>
-        </section>
+    {sections.map(({ id, component }) => (
+        <div key={id}>{component}</div>
       ))}
-    </main>
+  </main>
   );
 };
 

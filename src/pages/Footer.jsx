@@ -74,17 +74,17 @@ const Footer = () => {
   }, [location]);
 
   return (
-    <footer className="bg-[#eeeeee] dark:bg-[#212121] text-black dark:text-white py-6">
+    <footer className="bg-gray-300 dark:bg-[#212121] text-black dark:text-white py-2">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
         {/* Logo and Copy Info */}
         <div className="flex flex-col items-center justify-center mb-4 mb-0">
           <img
             src={darkMode ? Logo2 : Logo}
             alt="Logo"
-            className="h-[200px] w-[200px] ml-12 mr-12"
+            className="h-[100px] w-[100px] ml-12 mr-12"
           />
           <p className="text-sm mt-2 mr-4 text-center">John Leonard Burgos</p>
-          <p className="text-sm mt-2 mr-2 text-center">
+          <p className="text-sm mt-2 mr-2 ml-4 text-center">
             Full-Stack Software Developer
           </p>
         </div>
@@ -160,7 +160,7 @@ const Footer = () => {
       </div>
 
       {/* Social Icons */}
-      <div className="w-full flex justify-between items-center flex-col md:flex-row pt-6 border-t-[1px] border-t-[#3F3E45] pl-6 pr-6">
+      <div className="w-full flex justify-between items-center flex-col md:flex-row pt-6 border-t-[1px] border-t-[#3F3E45] pl-6 pr-6 pb-2">
         <p className="font-poppins font-normal text-center text-[12px] leading-[27px] text-black dark:text-white mb-2">
           Copyright Ⓒ {currentYear} John Leonard Burgos. All Rights Reserved.
         </p>

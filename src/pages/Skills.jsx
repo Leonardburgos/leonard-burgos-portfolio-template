@@ -1,17 +1,17 @@
 import React from "react";
 
-const About = () => {
+const Skills = () => {
   return (
     <section
-      id="about"
+      id="skills"
       className="min-h-screen flex flex-col justify-center items-center"
     >
-      <h1 className="text-4xl text-black dark:text-white">About</h1>
+      <h1 className="text-4xl text-black dark:text-white">Skills</h1>
       <p className="text-lg text-gray-700 dark:text-gray-300 mt-4">
-        This is the About section. Here you can describe yourself.
+        Showcase your skills in this section.
       </p>
     </section>
   );
 };
 
-export default About;
+export default Skills;
